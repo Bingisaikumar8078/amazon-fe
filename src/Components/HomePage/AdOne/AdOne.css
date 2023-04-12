@@ -1,0 +1,18 @@
+.Adone__main {
+  height: 350px;
+  min-width: 335px;
+  background-color: white;
+  margin: 10px;
+}
+.Adone__header {
+  font-size: 21px;
+  line-height: 27px;
+  font-weight: bold;
+  padding: 15px;
+}
+.Adone__body {
+  padding-left: 15px;
+}
+.Adone__footer {
+  padding: 15px;
+}

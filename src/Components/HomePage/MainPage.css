@@ -1,0 +1,13 @@
+.mainpage{
+    width: 100vw;
+    height: 100%;
+    background: url('https://ik.imagekit.io/q7q7dn72y/amazon-image/amazon-image/bigimage2.jpg?updatedAt=1681129165320');
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    background-color: #EAEDED;
+}
+.allads{
+    padding-top: 260px;
+    display: flex;
+    flex-wrap: wrap;
+}
