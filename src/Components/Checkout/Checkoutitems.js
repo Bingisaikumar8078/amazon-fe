@@ -14,7 +14,7 @@ function CheckoutItems(props) {
         }}
       >
         <div style={{ margin: "25px" }}>
-          <img height="200px" src={props.definition.image} />
+          <img height="200px" src={props.definition.image} alt="" />
         </div>
         <div style={{ marginTop: "20px" }}>
           <div style={{ fontSize: "20px" }} className="textgap">

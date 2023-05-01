@@ -17,7 +17,7 @@ function App() {
         
         <Route path="/display" element={<Displaypage />} />
 
-        <Route path="/order/:id" element={<PlaceOrder />} />
+        <Route path="/order/:productId" element={<PlaceOrder />} />
 
         <Route path="/checkout" element={<Checkout />} />
 
