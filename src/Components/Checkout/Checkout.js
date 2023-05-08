@@ -7,11 +7,14 @@ import { CartContext } from "../CartContext";
 function Checkout(props) {
   const { item, size } = useContext(CartContext);
   const cartValue = function () {
+   
+    console.log(item)
     let price = 0;
     for (let i = 0; i < item.length; i++) {
       price += parseInt(item[i].price);
     }
     return price;
+   
   };
   return (
     <div className="checkout__body">

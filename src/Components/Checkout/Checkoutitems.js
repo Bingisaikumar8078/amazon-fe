@@ -1,7 +1,14 @@
-import React from "react";
+import React ,{useContext, useState} from "react";
 import "./Checkout.css";
+import { CartContext } from "../CartContext";
 
 function CheckoutItems(props) {
+//   const [product , setproduct ] = useState([])
+//   const { decrement } = useContext(CartContext);
+//   const removeItem= function(){
+// console.log(props.definition)
+// decrement(product);
+//   }
   return (
     <div>
       <div
@@ -14,7 +21,7 @@ function CheckoutItems(props) {
         }}
       >
         <div style={{ margin: "25px" }}>
-          <img height="200px" src={props.definition.image} alt="" />
+          <img height="200px" src={props.definition.imageURL} alt="" />
         </div>
         <div style={{ marginTop: "20px" }}>
           <div style={{ fontSize: "20px" }} className="textgap">
@@ -27,6 +34,11 @@ function CheckoutItems(props) {
           <div className="textgap">
             FREE delivery Tuesday, 25 April. Order within 19 hrs 7 mins.
           </div>
+          <button 
+          // onClick={removeItem}
+          >
+            remove item
+          </button>
         </div>
       </div>
     </div>

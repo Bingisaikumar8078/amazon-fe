@@ -19,6 +19,13 @@ class CartContextProvider extends Component{
                 this.setState({size: this.state.item.length})
                 this.state.saveToLocalCache();
             },
+//             decrement: (value) =>{
+// let itemList = this.state.item;
+// delete itemList[0];
+
+// this.setState({item: itemList})
+// this.setState({size: this.state.item.length})
+//             },
             saveToLocalCache: ()=>{
                 localStorage.setItem('myCart', JSON.stringify(this.state.item));
             }
