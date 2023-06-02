@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./AdFour.css";
+import { Link } from "react-router-dom";
 
 function AdFour(props) {
   const [listOfProduct, setListOfProducts] = useState([]);
@@ -29,26 +30,33 @@ function AdFour(props) {
         <div className="AdvertisementOne__body">
           {
             <>
+            <Link
+              to={`/display`}
+              style={{ textDecoration: "none" }}
+              key={listOfProduct[0]?.id}
+            >
+
               <img
                 src={listOfProduct[0]?.imageURL}
                 className="ad_fourImage"
                 alt=""
-              />
+                />
               <img
                 src={listOfProduct[1]?.imageURL}
                 className="ad_fourImage"
                 alt=""
-              />
+                />
               <img
                 src={listOfProduct[2]?.imageURL}
                 className="ad_fourImage"
                 alt=""
-              />
+                />
               <img
                 src={listOfProduct[3]?.imageURL}
                 className="ad_fourImage"
                 alt=""
-              />
+                />
+                </Link>
             </>
           }
           {/* <img src='https://ik.imagekit.io/q7q7dn72y/amazon-image/amazon-image/V238940049_IN_PC_BAU_Edit_Creation_Laptops2X._SY608_CB667377204_.jpg?updatedAt=1681129188611' className='ad_fourImage' alt=""/>

@@ -20,12 +20,6 @@
   font-weight: bold;
   margin-left: 5px;
 }
-/* .navbar_locatorImage {
-    background: url("https://ik.imagekit.io/q7q7dn72y/amazon-image/amazon-image/sprite_350x.png?updatedAt=1681129184635")
-      no-repeat -70px -305px;
-      width: 16px;
-      height: 18px;
-  } */
 .navbar__locatorImage {
   background: url("https://ik.imagekit.io/q7q7dn72y/amazon-image/amazon-image/sprite_350x.png?updatedAt=1681129184635")
     no-repeat -70px -378px;

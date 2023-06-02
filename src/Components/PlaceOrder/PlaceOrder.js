@@ -25,18 +25,19 @@ function PlaceOrder() {
       const product = await axios.get(
         `http://localhost:8082/amazon/products/search/${productId}`
       );
+      console.log(product.data);
       setProductDetails(product.data);
+
     } catch (error) {
       console.error(error);
     }
   }
   useEffect(() => {
     getProduct();
-  }, [productId]);
+  }, []);
 
   return (
     <div>
-      PlaceOrder
       <Grid container>
         <Grid item xs={6}>
           <img
