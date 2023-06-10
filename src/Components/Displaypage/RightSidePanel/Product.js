@@ -1,38 +1,78 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from "react";
 import "./RightSidePanel.css";
-import Rating from '@material-ui/lab/Rating';    
-import getSymbolFromCurrency from 'currency-symbol-map'; 
-import { useState } from 'react';
+import Rating from "@material-ui/lab/Rating";
+import getSymbolFromCurrency from "currency-symbol-map";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+import { CartContext } from "../../CartContext";
 
-function Product(props) {
-    const [price, setprice] = useState(props.definition.price)
-    useEffect(() => {
-        const eventsource = new EventSource("http://localhost:8082/amazon/products/prices");
-        let priceData;
-        eventsource.addEventListener("price-event",(e)=>{
-            priceData= e.data;
-            setprice(priceData)
-        })
-    }, [])
-    
-    return (
-        <div className="product">
-            <div className="product__image">
-                <img src={props.definition.imageURL} height="280px" alt='' />
-            </div>
-            <div className="product__name">
-                 {props.definition.name}
-            </div>
-            <div className="product__rating">
-                 <Rating name="read-only" value="4" style={{ fontSize : "20px"}} readOnly />
-                {props.definition.rating}
-            </div>
-            <div className="product__price">
-            { getSymbolFromCurrency('INR')}
-{price}
-            </div>
-        </div>
-    );
-}
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    maxWidth: 345,
+    marginTop: theme.spacing(2),
+  },
+  //   media: {
+  //     width: 228,
+  //     margin: 30,
+  //     marginRight: theme.spacing(2),
+  //   },
+  media: {
+    width: "52%",
+    display: "flex",
+  },
+  content: {
+    flex: 1,
+  },
+  button: {
+    marginTop: theme.spacing(2),
+  },
+}));
+
+const Product = (props) => {
+  const classes = useStyles();
+  const { increment } = useContext(CartContext);
+
+  const addTOCart = function () {
+    increment(props.definition);
+  };
+
+  return (
+    <Card className={classes.root}>
+      <CardMedia
+        className={classes.media}
+        component="img"
+        image={props.definition.imageURL}
+        title="Product Image"
+      />
+      <CardContent className={classes.content}>
+        <Typography variant="h5" component="h2">
+          {props.definition.name}
+        </Typography>
+        <Typography variant="h6" component="h3" gutterBottom>
+          {getSymbolFromCurrency("INR")}
+          {props.definition.price}
+        </Typography>
+        <Typography variant="h6" component="h3" gutterBottom>
+          <Rating
+            name="read-only"
+            value={props.definition.rating}
+            style={{ fontSize: "20px" }}
+            readOnly
+          />
+        </Typography>
+        <Button variant="contained" color="primary" className={classes.button}
+        onClick={addTOCart}
+        >
+          Add to Cart
+        </Button>
+      </CardContent>
+    </Card>
+  );
+};
 
 export default Product;

@@ -22,7 +22,7 @@ function App() {
 
 
         
-        <Route path="/display" element={<Displaypage />} />
+        <Route path="/display/:type" element={<Displaypage />} />
 
         <Route path="/order/:productId" element={<PlaceOrder />} />
 

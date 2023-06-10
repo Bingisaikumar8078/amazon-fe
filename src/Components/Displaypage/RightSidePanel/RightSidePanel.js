@@ -7,15 +7,19 @@ import { Link } from "react-router-dom";
 // import { Link } from 'react-router-dom';
 
 function RightSidePanel(props) {
+  const {type} =  props;
+  const [productType, setproductType] = useState('')
   const [listOfProduct, setListOfProducts] = useState([]);
 
   let list;
   async function getProduct() {
     try {
-      list = await axios.get(
-        "http://localhost:8082/amazon/products/product/phone"
-      );
-      setListOfProducts(list.data);
+      if(type){
+        list = await axios.get(
+          `http://localhost:8082/amazon/products/product/${type}`
+        );
+        setListOfProducts(list.data);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -35,6 +39,7 @@ function RightSidePanel(props) {
     }
   }
   useEffect(() => {
+    setproductType(type);
     getProduct();
   }, []);
 
@@ -65,6 +70,10 @@ function RightSidePanel(props) {
               onClick={(e) => getProductWithType(e)}
             />
             oneplus
+          </label>
+          <label className="brandname">
+            <input type="checkbox"  onClick={() => getProduct()}/>
+            ALL
           </label>
         </div>
         <div className="RightSide__main">

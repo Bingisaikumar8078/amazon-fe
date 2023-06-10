@@ -39,14 +39,14 @@ function PlaceOrder() {
   return (
     <div>
       <Grid container>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <img
             className="placeorder__image"
             src={productDetails.imageURL}
             alt=""
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={4}>
           <div className="placeholder__description">
             <div
               style={{
@@ -122,7 +122,7 @@ function PlaceOrder() {
             </div>
           </div>
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={1}>
           Order
           <Paper variant="outlined" className="placeorder__order">
             <button

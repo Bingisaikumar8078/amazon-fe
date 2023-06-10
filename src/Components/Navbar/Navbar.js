@@ -61,12 +61,20 @@ class Navbar extends Component {
         </div>
         <div className="navbar__footer">
           <div className="navbar__footer_text">Best Seller</div>
-          <Link to="/display" style={{ textDecoration: "none" , color: '#FFF'}}>
+          <Link
+            to="/display/phone"
+            style={{ textDecoration: "none", color: "#FFF" }}
+          >
             <div className="navbar__footer_text">Mobile</div>
           </Link>
           <div className="navbar__footer_text">Amazon Pay</div>
           <div className="navbar__footer_text">Fashion</div>
-          <div className="navbar__footer_text">Electronics</div>
+          <Link
+            to="/display/electronics"
+            style={{ textDecoration: "none", color: "#FFF" }}
+          >
+            <div className="navbar__footer_text">Electronics</div>
+          </Link>
           <div className="navbar__footer_text">Prime</div>
           <div className="navbar__footer_text">New Release</div>
           <div className="navbar__footer_text">Customer Service</div>
