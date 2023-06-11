@@ -7,6 +7,7 @@ const MainPage = () => {
     <div className='mainpage'>
     
     <div className='allads'>
+
       <AdOne/>
       <AdFour/>
       <AdOne/>

@@ -4,9 +4,11 @@ import Checkout from "./Components/Checkout/Checkout";
 import Displaypage from "./Components/Displaypage/Displaypage";
 import MainPage from "./Components/HomePage/MainPage";
 import Login from "./Components/Login/Login";
+import Register from './Components/Register/Register'
 import Navbar from "./Components/Navbar/Navbar";
 import PlaceOrder from "./Components/PlaceOrder/PlaceOrder";
 import { Routes, Route } from "react-router-dom";
+import Profile from "./Components/Profile/Profile";
 
 function App() {
   return (
@@ -14,10 +16,12 @@ function App() {
     <div className="App">
         <Navbar />
       <Routes>
-        <Route path="" element={<MainPage />} />
+        <Route path="/main" element={<MainPage />} />
 
-        {/* <Route path="" element={<Login />} />
-        <Route path="/signup" element={<MainPage />} /> */}
+        <Route path="" element={<Login />} />
+        <Route path="/signup" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+
 
 
 
