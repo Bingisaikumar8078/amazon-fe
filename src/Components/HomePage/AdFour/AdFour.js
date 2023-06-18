@@ -31,7 +31,7 @@ function AdFour(props) {
           {
             <>
             <Link
-              to={`/display`}
+              to={`/display/phone`}
               style={{ textDecoration: "none" }}
               key={listOfProduct[0]?.id}
             >

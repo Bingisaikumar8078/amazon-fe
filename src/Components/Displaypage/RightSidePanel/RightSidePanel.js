@@ -28,11 +28,9 @@ function RightSidePanel(props) {
   async function getProductWithType(e) {
     try {
       const type = e.target.value;
-      console.log(type);
      list = await axios.get(
         `http://localhost:8082/amazon/products/phone/${type}`
       );
-      console.log(list.data);
       setListOfProducts(list.data);
     } catch (error) {
       console.log(error);

@@ -1,14 +1,14 @@
-import { Grid } from "@material-ui/core";
-import React, { useContext } from "react";
+import { Button, Grid } from "@material-ui/core";
+import React, { useContext, useState } from "react";
 import "./Checkout.css";
 import Checkoutitems from "./Checkoutitems";
 import { CartContext } from "../CartContext";
+import OrderNowModal from "../OrderNow/OrderNowModal";
 
 function Checkout(props) {
   const { item, size } = useContext(CartContext);
+  const [show, setshow] = useState(false)
   const cartValue = function () {
-   
-    console.log(item)
     let price = 0;
     for (let i = 0; i < item.length; i++) {
       price += parseInt(item[i].price);
@@ -16,6 +16,9 @@ function Checkout(props) {
     return price;
    
   };
+  const handle = ()=>{
+    setshow(true);
+  }
   return (
     <div className="checkout__body">
       <Grid container>
@@ -53,14 +56,21 @@ function Checkout(props) {
             }}
           >
             <div style={{ fontSize: "26px" }}>
-              Subtotal ( {size} items): <strong>{cartValue()}</strong>
+              Subtotal ( {item.length} items): <strong>{cartValue()}</strong>
             </div>
-            <div style={{ paddingTop: "25px " }}>
-              <button className="placeorder__button">Proceed to Buy</button>
-            </div>
+            {/* <div style={{ paddingTop: "25px " }}>
+              <button className="placeorder__button" >Proceed to Buy</button>
+            </div> */}
+
+            <Button
+            onClick={handle}
+            >
+              Buy Now
+            </Button>
           </div>
         </Grid>
       </Grid>
+      <OrderNowModal setShow ={setshow} show={show}/>
     </div>
   );
 }

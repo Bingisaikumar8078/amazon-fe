@@ -58,9 +58,8 @@
   text-align-last: center;
 }
 .navbar__signin {
-  width: 120px;
-  margin-top: 5px;
-  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
 }
 .navbar__returnsandorders {
   width: 80px;

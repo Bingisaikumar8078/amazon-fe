@@ -1,6 +1,8 @@
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 const API_URL = "http://localhost:8080/api/auth/";
+
 
 const register = (username, email, password) => {
   return axios.post(API_URL + "signup", {
@@ -25,22 +27,30 @@ const login = (username, password) => {
     });
 };
 
+const addToCart = (productInfo) => {
+   return  axios.post(`http://localhost:8082/amazon/cart/addToCart`,productInfo)
+   .then(res=>alert("Your product has been added to cart"))
+   .catch(err=>alert(err))
+   
+  }
+  
 const logout = () => {
-    localStorage.removeItem("user");
-    return axios.post(API_URL + "signout").then((response) => {
-      return response.data;
-    });
-  };
-
-const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("user"));
-};
-
-const AuthService = {
-  register,
-  login,
-  logout,
-  getCurrentUser,
+  console.log("first")
+  localStorage.removeItem("user");
+  window.location.reload();
+  return <Navigate to=''/>
+    }
+    
+    function getCurrentUser() {
+      return JSON.parse(localStorage.getItem("user"));
+    }
+    
+    const AuthService = {
+      register,
+      login,
+      logout,
+      addToCart,
+      getCurrentUser,
 };
 
 export default AuthService;

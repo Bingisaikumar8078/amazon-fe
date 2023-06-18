@@ -5,7 +5,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { login } from "../../slices/auth";
 import { clearMessage } from "../../slices/message";
-
+import { Button } from "@material-ui/core";
 
 
 
@@ -49,7 +49,6 @@ const Login = () => {
   };
 
   if (isLoggedIn) {
-    console.log(isLoggedIn)
     return <Navigate to="/main" />;
   }
 
@@ -102,17 +101,25 @@ const Login = () => {
                 />
               </div>
 
-              <div className="form-group">
-                <button
+              <div className="form-group" style={{marginTop : "10px" }}>
+                <Button
                   type="submit"
-                  className="btn btn-primary btn-block"
-                  disabled={loading}
+                  color="primary"
+                  size="small"
+                  variant="outlined"
                 >
-                  {loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  )}
                   <span>Login</span>
-                </button>
+                </Button>
+              </div>
+              <div className="form-group" style={{marginTop : "10px" }}>
+                <Button
+                  color="primary"
+                  size="small"
+                  variant="outlined"
+                  onClick={ () => navigate('/signup')}
+                >
+                  <span>Register</span>
+                </Button>
               </div>
             </Form>
           )}

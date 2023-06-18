@@ -4,16 +4,39 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import "./PlaceOrder.css";
+import { useSelector } from "react-redux";
 import { CartContext } from "../CartContext";
 
 function PlaceOrder() {
+  let user;
   const [productDetails, setProductDetails] = useState([]);
   const { increment } = useContext(CartContext);
   let { productId } = useParams();
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
-  const addTOCart = function () {
-    increment(productDetails);
-  };
+  // const addTOCart = function () {
+    // };
+    if(isLoggedIn){
+      user = JSON.parse(localStorage.getItem("user"))
+    }
+    
+    const addTOCart = () =>{
+      
+        increment(productDetails);
+    const productInfo ={
+      brand:productDetails.brand,
+      name:productDetails.name,
+      price:productDetails.price,
+      productId:productDetails.productId,
+      rating:productDetails.rating,
+      userId:user.id,
+      imageURl:productDetails.imageURL,
+      type:productDetails.type
+    }
+    axios.post(`http://localhost:8082/amazon/cart/addToCart`,productInfo)
+    .then(res=>alert("Your product has been added to cart"))
+    .catch(err=>alert(err))
+  }
  const  about = [
     "6.1-inch (15.5 cm diagonal) Liquid Retina HD LCD display",
     "Water and dust resistant (2 meters for up to 30 minutes, IP68)",
@@ -25,7 +48,6 @@ function PlaceOrder() {
       const product = await axios.get(
         `http://localhost:8082/amazon/products/search/${productId}`
       );
-      console.log(product.data);
       setProductDetails(product.data);
 
     } catch (error) {

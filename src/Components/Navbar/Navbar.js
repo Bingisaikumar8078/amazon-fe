@@ -1,21 +1,25 @@
-import React, { Component } from "react";
-// import { Link } from 'react-router-dom';
-// import { CartContext } from '../CartContext';
+import React, { useContext } from 'react'
 import "./Navbar.css";
-import { CartContext } from "../CartContext";
+// import { CartContext } from "../CartContext";
 import { Link } from "react-router-dom";
+import { useSelector } from 'react-redux';
+import { CartContext } from '../CartContext';
+import { Button } from '@material-ui/core';
+import AuthService from '../../services/auth-service';
+function Navbar() {
+  let user;
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
-class Navbar extends Component {
-  static contextType = CartContext;
-
-  constructor(props) {
-    super(props);
-    this.state = {};
+  const { item,  size  } = useContext(CartContext);
+  const logout = ()=>{
+    AuthService.logout();
   }
 
-  render() {
-    let { item, size, increment } = this.context;
-    return (
+if(isLoggedIn){
+ user = JSON.parse(localStorage.getItem("user"))
+}
+
+  return (
       <div>
         <div className="navbar__component">
           <Link to="">
@@ -44,8 +48,18 @@ class Navbar extends Component {
             </div>
           </div>
           <div className="navbar_text navbar__signin">
-            <div style={{ fontSize: "14px" }}>Hello, Sign In</div>
-            <div style={{ fontWeight: "bold" }}>Account & List</div>
+            <div style={{ fontSize: "14px" }}>Hello </div>
+            {
+              isLoggedIn ? (<div style={{ fontSize: "14px" , fontWeight: "bold"  }}>{user.username}</div>):
+              (<div style={{ fontSize: "14px" }}>Sign In</div>)
+            }
+
+            
+            <Link to='/profile'
+            style={{ textDecoration: "none", color: "#FFF" }} 
+            >
+            <div>Account</div>
+            </Link>
           </div>
           <div className="navbar_text navbar__returnsandorders ">
             <div style={{ fontSize: "14px" }}>Returns</div>
@@ -54,10 +68,20 @@ class Navbar extends Component {
           <Link to="/checkout">
             <div className="navbar_text navbar__cart">
               <div src="" className="cart__image"></div>
-              <div className="cart__item"> {size} </div>
+              <div className="cart__item">{item.length} </div>
               <div className="navbar_text_cart">Cart</div>
             </div>
           </Link>
+           <div
+           style={{margin: '12px'}}
+           >
+           <Button
+            variant="contained" color="primary" size='small'
+            onClick={logout}
+            >
+              Logout
+            </Button>
+           </div>
         </div>
         <div className="navbar__footer">
           <div className="navbar__footer_text">Best Seller</div>
@@ -83,6 +107,6 @@ class Navbar extends Component {
         </div>
       </div>
     );
-  }
 }
-export default Navbar;
+
+export default Navbar

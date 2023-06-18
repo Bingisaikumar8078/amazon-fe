@@ -4,10 +4,11 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { clearMessage } from "../../slices/message";
 import { register } from "../../slices/auth";
-
-
+import { Button } from "@material-ui/core";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  let navigate = useNavigate();
   const [successful, setSuccessful] = useState(false);
 
   const { message } = useSelector((state) => state.message);
@@ -61,7 +62,7 @@ const Register = () => {
   };
 
   return (
-    <div className="col-md-12 signup-form">
+    <div className="login-form">
       <div className="card card-container">
         <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -132,10 +133,25 @@ const Register = () => {
                     />
                   </div>
 
-                  <div className="form-group">
-                    <button type="submit" className="btn btn-primary btn-block">
-                      Sign Up
-                    </button>
+                  <div className="form-group" style={{ marginTop: "10px" }}>
+                    <Button
+                      type="submit"
+                      color="primary"
+                      size="small"
+                      variant="outlined"
+                    >
+                      <span>Sign up</span>
+                    </Button>
+                  </div>
+                  <div className="form-group" style={{ marginTop: "10px" }}>
+                    <Button
+                      color="primary"
+                      size="small"
+                      variant="outlined"
+                      onClick={() => navigate('/')}
+                    >
+                      <span>Login</span>
+                    </Button>
                   </div>
                 </div>
               )}
@@ -160,4 +176,4 @@ const Register = () => {
   );
 };
 
-export default Register
+export default Register;
