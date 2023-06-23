@@ -55,6 +55,7 @@ const Register = () => {
       .unwrap()
       .then(() => {
         setSuccessful(true);
+        navigate('/')
       })
       .catch(() => {
         setSuccessful(false);

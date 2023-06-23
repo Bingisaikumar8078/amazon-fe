@@ -1,8 +1,16 @@
-import { Box, Button, Modal, Typography, makeStyles } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  IconButton,
+  Modal,
+  Typography,
+  makeStyles,
+} from "@material-ui/core";
 import * as React from "react";
+import CloseIcon from "@mui/icons-material/Close";
 
-const useStyles = makeStyles(() => ({
-  style: {
+const style = {
+  mdal: {
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -13,33 +21,34 @@ const useStyles = makeStyles(() => ({
     boxShadow: 24,
     p: 4,
   },
-}));
+};
 
-export default function OrderModal() {
-  const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+export default function OrderModal({ show, setShow }) {
+  console.log(show)
+  // const [open, setOpen] = React.useState(false);
+// setOpen(show)
+// console.log(open)
+  const handleClose = () => setShow(false);
+  // const handleClose = () =>{
+  //   show=false
+  // };
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={show}
+        // onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        style={style.mdal}
       >
-        <Box sx={{position: "absolute",
-   position: 'absolute',
-   top: '50%',
-   left: '50%',
-   transform: 'translate(-50%, -50%)',
-   width: '400px',
-   height: '300px',
-   backgroundColor: 'white',
-   border: '1px solid black',
-   padding: '16px'}}>
+        <Box>
+          <IconButton
+            // sx={{ position: "absolute", top: "50", left: "" }}
+            onClick={handleClose}
+          >
+            <CloseIcon />
+          </IconButton>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Text in a modal
           </Typography>

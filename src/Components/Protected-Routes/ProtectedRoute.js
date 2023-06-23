@@ -14,7 +14,7 @@ useEffect(() => {
 
     }
 
-}, []);
+}, [nav]);
   return (
     <div>{children}</div>
   )

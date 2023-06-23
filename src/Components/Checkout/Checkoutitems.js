@@ -9,6 +9,9 @@ import CardContent from "@material-ui/core/CardContent";
 import { Button } from "@material-ui/core";
 import { CartContext } from "../CartContext";
 import axios from "axios";
+import OrderNowModal from "../OrderNow/OrderNowModal";
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,42 +48,46 @@ const CheckoutItems = (props) => {
 
     decrement(props.definition);
   };
+  const rating = Number(props.definition.rating)
 
   return (
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        component="img"
-        image={props.definition.imageURL}
-        title="CheckoutItems Image"
-      />
-      <CardContent className={classes.content}>
-        <Typography variant="h5" component="h2">
-          {props.definition.name}
-        </Typography>
-        <Typography variant="h6" component="h3" gutterBottom>
-          {getSymbolFromCurrency("INR")}
-          {props.definition.price}
-        </Typography>
-        <Typography variant="h6" component="h3" gutterBottom>
-          <Rating
-            name="read-only"
-            value={props.definition.rating}
-            style={{ fontSize: "20px" }}
-            readOnly
-          />
-        </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          size="small"
-          onClick={removeFromCart}
-        >
-          Remove from cart
-        </Button>
-      </CardContent>
-    </Card>
+    <>
+      <Card className={classes.root}>
+        <CardMedia
+          className={classes.media}
+          component="img"
+          image={props.definition.imageURL}
+          title="CheckoutItems Image"
+        />
+        <CardContent className={classes.content} key={props.definition.id}>
+          <Typography variant="h5" component="h2">
+            {props.definition.name}
+          </Typography>
+          <Typography variant="h6" component="h3" gutterBottom>
+            {getSymbolFromCurrency("INR")}
+            {props.definition.price}
+          </Typography>
+          <Typography variant="h6" component="h3" gutterBottom>
+            <Rating
+              name="read-only"
+              value={rating}
+              style={{ fontSize: "20px" }}
+              readOnly
+            />
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            size="small"
+            onClick={removeFromCart}
+          >
+            Remove from cart
+          </Button>
+        </CardContent>
+      </Card>
+      {/* <OrderNowModal setShow={setshow} show={show} /> */}
+    </>
   );
 };
 

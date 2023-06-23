@@ -4,17 +4,18 @@ import "./RightSidePanel.css";
 import "../LeftSidePanel/LeftSidePanel.css";
 import Product from "./Product";
 import { Link } from "react-router-dom";
-// import { Link } from 'react-router-dom';
+import { Checkbox, FormControlLabel } from "@material-ui/core";
 
 function RightSidePanel(props) {
-  const {type} =  props;
-  const [productType, setproductType] = useState('')
+  const { type } = props;
+  // eslint-disable-next-line no-unused-vars
+  const [productType, setproductType] = useState("");
   const [listOfProduct, setListOfProducts] = useState([]);
 
   let list;
   async function getProduct() {
     try {
-      if(type){
+      if (type) {
         list = await axios.get(
           `http://localhost:8082/amazon/products/product/${type}`
         );
@@ -28,7 +29,7 @@ function RightSidePanel(props) {
   async function getProductWithType(e) {
     try {
       const type = e.target.value;
-     list = await axios.get(
+      list = await axios.get(
         `http://localhost:8082/amazon/products/phone/${type}`
       );
       setListOfProducts(list.data);
@@ -39,6 +40,7 @@ function RightSidePanel(props) {
   useEffect(() => {
     setproductType(type);
     getProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -63,14 +65,22 @@ function RightSidePanel(props) {
               />
             Samsung
           </label>
+         {/* <FormControlLabel
+            control={
+              <Checkbox  onChange={(e) => getProductWithType(e)} name="Samsung" />
+            }
+            label="Samsung"
+          /> */}
           <label className="brandname">
-            <input type="checkbox" value="oneplus" 
+            <input
+              type="checkbox"
+              value="oneplus"
               onClick={(e) => getProductWithType(e)}
             />
             oneplus
           </label>
           <label className="brandname">
-            <input type="checkbox"  onClick={() => getProduct()}/>
+            <input type="checkbox" onClick={() => getProduct()} />
             ALL
           </label>
         </div>

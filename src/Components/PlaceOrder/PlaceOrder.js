@@ -14,49 +14,48 @@ function PlaceOrder() {
   let { productId } = useParams();
   const { isLoggedIn } = useSelector((state) => state.auth);
 
-  // const addTOCart = function () {
-    // };
-    if(isLoggedIn){
-      user = JSON.parse(localStorage.getItem("user"))
-    }
-    
-    const addTOCart = () =>{
-      
-        increment(productDetails);
-    const productInfo ={
-      brand:productDetails.brand,
-      name:productDetails.name,
-      price:productDetails.price,
-      productId:productDetails.productId,
-      rating:productDetails.rating,
-      userId:user.id,
-      imageURl:productDetails.imageURL,
-      type:productDetails.type
-    }
-    axios.post(`http://localhost:8082/amazon/cart/addToCart`,productInfo)
-    .then(res=>alert("Your product has been added to cart"))
-    .catch(err=>alert(err))
+  if (isLoggedIn) {
+    user = JSON.parse(localStorage.getItem("user"));
   }
- const  about = [
+
+  const addTOCart = () => {
+    increment(productDetails);
+    // const productInfo ={
+    //   brand:productDetails.brand,
+    //   name:productDetails.name,
+    //   price:productDetails.price,
+    //   productId:productDetails.productId,
+    //   rating:productDetails.rating,
+    //   userId:user.id,
+    //   imageURl:productDetails.imageURL,
+    //   type:productDetails.type
+    // }
+    // axios.post(`http://localhost:8082/amazon/cart/addToCart`,productInfo)
+    // .then(res=>alert("Your product has been added to cart"))
+    // .catch(err=>alert(err))
+  };
+  const about = [
     "6.1-inch (15.5 cm diagonal) Liquid Retina HD LCD display",
     "Water and dust resistant (2 meters for up to 30 minutes, IP68)",
     "Dual-camera system with 12MP Ultra Wide and Wide cameras; Night mode, Portrait mode, and 4K video up to 60fps",
     "Face ID for secure authentication",
-]
+  ];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   async function getProduct() {
     try {
       const product = await axios.get(
         `http://localhost:8082/amazon/products/search/${productId}`
       );
       setProductDetails(product.data);
-
     } catch (error) {
       console.error(error);
     }
   }
   useEffect(() => {
     getProduct();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const rating=Number(productDetails.rating)
 
   return (
     <div>
@@ -82,11 +81,11 @@ function PlaceOrder() {
             <div>
               <Rating
                 name="read-only"
-                value="4"
+                value={rating}
                 style={{ fontSize: "20px" }}
                 readOnly
               />
-              {productDetails.rating}| 1000 + answered questions
+          | 1000 + answered questions
             </div>
             <hr></hr>
             <div>
@@ -115,7 +114,11 @@ function PlaceOrder() {
               <div>
                 <ul>
                   {about !== undefined ? (
-                    about.map((item) => <li>{item}</li>)
+                    about.map((item , index) => (
+                      <li key={index}>
+                        {item} 
+                      </li>
+                    ))
                   ) : (
                     <span></span>
                   )}

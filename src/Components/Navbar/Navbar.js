@@ -1,112 +1,173 @@
-import React, { useContext } from 'react'
-import "./Navbar.css";
-// import { CartContext } from "../CartContext";
-import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import { CartContext } from '../CartContext';
-import { Button } from '@material-ui/core';
-import AuthService from '../../services/auth-service';
-function Navbar() {
+import {
+  AppBar,
+  Badge,
+  Button,
+  IconButton,
+  InputBase,
+  Toolbar,
+  Typography,
+  makeStyles,
+} from "@material-ui/core";
+import Amazon from "./Amazon-logo.png";
+import { useSelector } from "react-redux";
+import { CartContext } from "../CartContext";
+import { useContext } from "react";
+import AuthService from "../../services/auth-service";
+import { Link, useNavigate } from "react-router-dom";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
+import SearchTwoToneIcon from "@mui/icons-material/SearchTwoTone";
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    backgroundColor: "#131a22",
+    minHeight: "1rem",
+  },
+  logo: {
+    // background: url("https://ik.imagekit.io/q7q7dn72y/amazon-image/amazon-image/sprite_350x.png?updatedAt=1681129184635")
+    height: "31px",
+    // backgroundColor: 'white'
+  },
+  search: {
+    position: "relative",
+    borderBottomLeftRadius: theme.shape.borderRadius,
+    borderTopLeftRadius: theme.shape.borderRadius,
+    backgroundColor: "#fff",
+    marginLeft: "2%",
+    width: "30%",
+  },
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  searchTwoToneIcon: {
+    backgroundColor: "#febe68",
+    height: "32px",
+    borderRadius: "0px 5px 5px 0px",
+  },
+  footer: {
+    width: "100vw",
+    height: "30px",
+    backgroundColor: "#22303e",
+    color: "white",
+    // display: "flex",
+  },
+  text: {
+    margin: "5px 10px",
+    fontSize: "14px",
+    fontWeight: "bold",
+    display: "flex",
+    marginLeft: "2%",
+  },
+}));
+
+const NavBar = () => {
+  const classes = useStyles();
   let user;
+  const nav = useNavigate();
   const { isLoggedIn } = useSelector((state) => state.auth);
 
-  const { item,  size  } = useContext(CartContext);
-  const logout = ()=>{
+  const { item } = useContext(CartContext);
+  const logout = () => {
     AuthService.logout();
+  };
+
+  if (isLoggedIn) {
+    user = JSON.parse(localStorage.getItem("user"));
   }
 
-if(isLoggedIn){
- user = JSON.parse(localStorage.getItem("user"))
-}
-
   return (
-      <div>
-        <div className="navbar__component">
+    <>
+      <AppBar position="static" className={classes.appBar}>
+        <Toolbar>
           <Link to="">
-            <div className="navbar__logo"></div>
+            <img src={Amazon} alt="Amazon Logo" className={classes.logo} />
           </Link>
-          <div className="navbar__locator">
-            <div className="navbar__locatorImage"></div>
-            <div className="navbar__location"> Hyderabad</div>
+          <LocationOnOutlinedIcon />
+          <span>Hyderabad</span>
+          <div className={classes.search}>
+            <div className={classes.searchIcon}></div>
+            <InputBase placeholder="Search..." />
           </div>
-          <div className="navbar__searchcomponent">
-            <div>
-              <select className="navbar__dropbox">
-                <option value="All">All</option>
-                <option value="Alexa">Alexa</option>
-                <option value="Books">Books</option>
-                <option value="Baby">Baby</option>
-                <option value="Beauty">Beauty</option>
-                <option value="Clothes">Clothes</option>
-              </select>
-            </div>
-            <div>
-              <input type="text" className="navbar__searchbox" />
-            </div>
-            <div className="navbar__seaarchboxdiv">
-              <div className="navbar__searchicon" />
-            </div>
+          <div className={classes.searchTwoToneIcon}>
+            <SearchTwoToneIcon />
           </div>
-          <div className="navbar_text navbar__signin">
-            <div style={{ fontSize: "14px" }}>Hello </div>
-            {
-              isLoggedIn ? (<div style={{ fontSize: "14px" , fontWeight: "bold"  }}>{user.username}</div>):
-              (<div style={{ fontSize: "14px" }}>Sign In</div>)
-            }
-
-            
-            <Link to='/profile'
-            style={{ textDecoration: "none", color: "#FFF" }} 
-            >
-            <div>Account</div>
-            </Link>
-          </div>
-          <div className="navbar_text navbar__returnsandorders ">
-            <div style={{ fontSize: "14px" }}>Returns</div>
-            <div style={{ fontWeight: "bold" }}> & Order</div>
-          </div>
-          <Link to="/checkout">
-            <div className="navbar_text navbar__cart">
-              <div src="" className="cart__image"></div>
-              <div className="cart__item">{item.length} </div>
-              <div className="navbar_text_cart">Cart</div>
-            </div>
+          <Button
+            color="inherit"
+            onClick={() => {
+              nav("/display/phone");
+            }}
+          >
+            Mobiles
+          </Button>
+          <Button
+            color="inherit"
+            onClick={() => {
+              nav("/display/electronics");
+            }}
+          >
+            Electronics
+          </Button>
+          <Button color="inherit">Registry</Button>
+          <Button color="inherit">Orders</Button>
+          <Typography variant="button" component="h2">
+            Hello
+            {isLoggedIn ? (
+              <Typography variant="button" component="h2">
+                {user.username}
+              </Typography>
+            ) : (
+              <Typography variant="button">Sign in.</Typography>
+            )}
+          </Typography>
+          <Link
+            to="/profile"
+            style={{ textDecoration: "none", color: "#FFF", marginLeft: "2%" }}
+          >
+            <Typography variant="h6" component="h3">
+              Account
+            </Typography>
           </Link>
-           <div
-           style={{margin: '12px'}}
-           >
-           <Button
-            variant="contained" color="primary" size='small'
+          <Link
+            to="/checkout"
+            style={{ textDecoration: "none", color: "#FFF", marginLeft: "2%" }}
+          >
+            <Badge badgeContent={item.length} color="primary">
+              <ShoppingCartOutlinedIcon fontSize="large" />
+            </Badge>
+          </Link>
+          <LogoutIcon sx={{ marginLeft: "2%" }} />
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
             onClick={logout}
-            >
-              Logout
-            </Button>
-           </div>
-        </div>
-        <div className="navbar__footer">
-          <div className="navbar__footer_text">Best Seller</div>
-          <Link
-            to="/display/phone"
-            style={{ textDecoration: "none", color: "#FFF" }}
           >
-            <div className="navbar__footer_text">Mobile</div>
-          </Link>
-          <div className="navbar__footer_text">Amazon Pay</div>
-          <div className="navbar__footer_text">Fashion</div>
-          <Link
-            to="/display/electronics"
-            style={{ textDecoration: "none", color: "#FFF" }}
-          >
-            <div className="navbar__footer_text">Electronics</div>
-          </Link>
-          <div className="navbar__footer_text">Prime</div>
-          <div className="navbar__footer_text">New Release</div>
-          <div className="navbar__footer_text">Customer Service</div>
-          <div className="navbar__footer_text">Computers</div>
-          <div className="navbar__footer_text">Home & Kitchen</div>
+            Logout
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <AppBar position="static" className={classes.footer}>
+        {/* <div className={classes.text}>
+          <Typography variant="subtitle1">Account</Typography>
+       
+          <Typography variant="subtitle1">Account</Typography>
+          <Typography variant="subtitle1">Account</Typography>
         </div>
-      </div>
-    );
-}
+        <div className={classes.text}>
+          <Typography variant="subtitle1">Account</Typography>
+       
+          <Typography variant="subtitle1">Account</Typography>
+          <Typography variant="subtitle1">Account</Typography>
+        </div> */}
+      </AppBar>
+    </>
+  );
+};
 
-export default Navbar
+export default NavBar;

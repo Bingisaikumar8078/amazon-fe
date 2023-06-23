@@ -50,9 +50,9 @@ const Product = (props) => {
       imageURl:props.definition.imageURL,
       type:props.definition.type
     }
-    axios.post(`http://localhost:8082/amazon/cart/addToCart`,productInfo)
-    .then(res=>alert("Your product has been added to cart"))
-    .catch(err=>alert(err))
+    // axios.post(`http://localhost:8082/amazon/cart/addToCart`,productInfo)
+    // .then(res=>alert("Your product has been added to cart"))
+    // .catch(err=>alert(err))
     increment(props.definition);
   };
 

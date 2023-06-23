@@ -5,6 +5,7 @@ class CartContextProvider extends Component {
   constructor(props) {
     super(props);
     let existingCart =
+      // eslint-disable-next-line eqeqeq
       localStorage.getItem("myCart") !=undefined
         ? JSON.parse(localStorage.getItem("myCart"))
         : [];

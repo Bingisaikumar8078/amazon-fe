@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
@@ -12,7 +12,7 @@ import { Button } from "@material-ui/core";
 const Login = () => {
   let navigate = useNavigate();
 
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
@@ -35,7 +35,6 @@ const Login = () => {
 
   const handleLogin = (formValue) => {
     const { username, password } = formValue;
-    setLoading(true);
 
     dispatch(login({ username, password }))
       .unwrap()
@@ -43,8 +42,8 @@ const Login = () => {
         navigate("/main");
         window.location.reload();
       })
-      .catch(() => {
-        setLoading(false);
+      .catch((err) => {
+        console.log(err)
       });
   };
 
