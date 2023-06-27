@@ -8,8 +8,6 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import { Button } from "@material-ui/core";
 import { CartContext } from "../CartContext";
-import axios from "axios";
-import OrderNowModal from "../OrderNow/OrderNowModal";
 
 
 
@@ -42,13 +40,12 @@ const CheckoutItems = (props) => {
   const classes = useStyles();
 
   const removeFromCart = () => {
-    axios
-      .delete(`http://localhost:8082/amazon/cart/delete/${props.definition.id}`)
-      .catch((err) => console.log(err));
+    // axios
+    //   .delete(`http://localhost:8082/amazon/cart/delete/${props.definition.id}`)
+    //   .catch((err) => console.log(err));
 
     decrement(props.definition);
   };
-  const rating = Number(props.definition.rating)
 
   return (
     <>
@@ -56,7 +53,7 @@ const CheckoutItems = (props) => {
         <CardMedia
           className={classes.media}
           component="img"
-          image={props.definition.imageURL}
+          image={props.definition.imageurl}
           title="CheckoutItems Image"
         />
         <CardContent className={classes.content} key={props.definition.id}>
@@ -70,7 +67,7 @@ const CheckoutItems = (props) => {
           <Typography variant="h6" component="h3" gutterBottom>
             <Rating
               name="read-only"
-              value={rating}
+              value={Number(props.definition.rating)}
               style={{ fontSize: "20px" }}
               readOnly
             />

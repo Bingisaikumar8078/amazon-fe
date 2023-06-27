@@ -4,7 +4,6 @@ import "./RightSidePanel.css";
 import "../LeftSidePanel/LeftSidePanel.css";
 import Product from "./Product";
 import { Link } from "react-router-dom";
-import { Checkbox, FormControlLabel } from "@material-ui/core";
 
 function RightSidePanel(props) {
   const { type } = props;
@@ -17,9 +16,10 @@ function RightSidePanel(props) {
     try {
       if (type) {
         list = await axios.get(
-          `http://localhost:8082/amazon/products/product/${type}`
+          `http://localhost:9090/amazon/products/product/${type}`
         );
         setListOfProducts(list.data);
+        console.log(list.data);
       }
     } catch (error) {
       console.error(error);
@@ -30,9 +30,10 @@ function RightSidePanel(props) {
     try {
       const type = e.target.value;
       list = await axios.get(
-        `http://localhost:8082/amazon/products/phone/${type}`
+        `http://localhost:9090/amazon/products/phone/${type}`
       );
       setListOfProducts(list.data);
+      console.log(listOfProduct);
     } catch (error) {
       console.log(error);
     }

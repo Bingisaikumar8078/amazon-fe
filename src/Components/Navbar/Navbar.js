@@ -2,7 +2,6 @@ import {
   AppBar,
   Badge,
   Button,
-  IconButton,
   InputBase,
   Toolbar,
   Typography,
@@ -115,10 +114,10 @@ const NavBar = () => {
           </Button>
           <Button color="inherit">Registry</Button>
           <Button color="inherit">Orders</Button>
-          <Typography variant="button" component="h2">
-            Hello
+          <Typography variant="button">
+            Hello,
             {isLoggedIn ? (
-              <Typography variant="button" component="h2">
+              <Typography variant="button">
                 {user.username}
               </Typography>
             ) : (

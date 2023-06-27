@@ -9,8 +9,7 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import { CartContext } from "../../CartContext";
-import axios from "axios";
-import AuthService from "../../../services/auth-service";
+// import AuthService from "../../../services/auth-service";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,18 +37,18 @@ const useStyles = makeStyles((theme) => ({
 const Product = (props) => {
   const classes = useStyles();
   const { increment } = useContext(CartContext);
-  const user = AuthService.getCurrentUser();
+  // const user = AuthService.getCurrentUser();
   const addTOCart = function () {
-    const productInfo ={
-      brand:props.definition.brand,
-      name:props.definition.name,
-      price:props.definition.price,
-      productId:props.definition.productId,
-      rating:props.definition.rating,
-      userId:user.id,
-      imageURl:props.definition.imageURL,
-      type:props.definition.type
-    }
+    // const productInfo ={
+    //   brand:props.definition.brand,
+    //   name:props.definition.name,
+    //   price:props.definition.price,
+    //   productId:props.definition.productId,
+    //   rating:props.definition.rating,
+    //   userId:user.id,
+    //   imageURl:props.definition.imageURL,
+    //   type:props.definition.type
+    // }
     // axios.post(`http://localhost:8082/amazon/cart/addToCart`,productInfo)
     // .then(res=>alert("Your product has been added to cart"))
     // .catch(err=>alert(err))
@@ -61,7 +60,7 @@ const Product = (props) => {
       <CardMedia
         className={classes.media}
         component="img"
-        image={props.definition.imageURL}
+        image={props.definition.imageurl}
         title="Product Image"
       />
       <CardContent className={classes.content}>

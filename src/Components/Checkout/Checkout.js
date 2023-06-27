@@ -7,6 +7,7 @@ import getSymbolFromCurrency from "currency-symbol-map";
 
 function Checkout(props) {
   const { item } = useContext(CartContext);
+  // eslint-disable-next-line no-unused-vars
   const [show, setshow] = useState(false);
   const cartValue = function () {
     let price = 0;
@@ -36,7 +37,7 @@ function Checkout(props) {
             </div>
             <div>
               {item.length > 0 ? (
-                item.map((value) => <Checkoutitems definition={value} key={value.id}/>)
+                item.map((value , index) => <Checkoutitems definition={value} key={index}/>)
               ) : (
                 <div style={{ height: "100vh", margin: "30px" }}>
                   {" "}

@@ -4,19 +4,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import "./PlaceOrder.css";
-import { useSelector } from "react-redux";
 import { CartContext } from "../CartContext";
 
 function PlaceOrder() {
-  let user;
   const [productDetails, setProductDetails] = useState([]);
   const { increment } = useContext(CartContext);
   let { productId } = useParams();
-  const { isLoggedIn } = useSelector((state) => state.auth);
 
-  if (isLoggedIn) {
-    user = JSON.parse(localStorage.getItem("user"));
-  }
 
   const addTOCart = () => {
     increment(productDetails);
@@ -27,7 +21,7 @@ function PlaceOrder() {
     //   productId:productDetails.productId,
     //   rating:productDetails.rating,
     //   userId:user.id,
-    //   imageURl:productDetails.imageURL,
+    //   imageurl:productDetails.imageurl,
     //   type:productDetails.type
     // }
     // axios.post(`http://localhost:8082/amazon/cart/addToCart`,productInfo)
@@ -44,9 +38,10 @@ function PlaceOrder() {
   async function getProduct() {
     try {
       const product = await axios.get(
-        `http://localhost:8082/amazon/products/search/${productId}`
+        `http://localhost:9090/amazon/products/search/${productId}`
       );
       setProductDetails(product.data);
+      console.log(product.data);
     } catch (error) {
       console.error(error);
     }
@@ -63,7 +58,7 @@ function PlaceOrder() {
         <Grid item xs={4}>
           <img
             className="placeorder__image"
-            src={productDetails.imageURL}
+            src={productDetails.imageurl}
             alt=""
           />
         </Grid>

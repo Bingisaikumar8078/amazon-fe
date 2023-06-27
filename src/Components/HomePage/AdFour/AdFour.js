@@ -9,7 +9,7 @@ function AdFour(props) {
   async function getProduct() {
     try {
       const list = await axios.get(
-        "http://localhost:8082/amazon/products/product/phone"
+        "http://localhost:9090/amazon/products/product/phone"
       );
       setListOfProducts(list.data);
     } catch (error) {
@@ -37,22 +37,22 @@ function AdFour(props) {
             >
 
               <img
-                src={listOfProduct[0]?.imageURL}
+                src={listOfProduct[0]?.imageurl}
                 className="ad_fourImage"
                 alt=""
                 />
               <img
-                src={listOfProduct[1]?.imageURL}
+                src={listOfProduct[1]?.imageurl}
                 className="ad_fourImage"
                 alt=""
                 />
               <img
-                src={listOfProduct[2]?.imageURL}
+                src={listOfProduct[2]?.imageurl}
                 className="ad_fourImage"
                 alt=""
                 />
               <img
-                src={listOfProduct[3]?.imageURL}
+                src={listOfProduct[3]?.imageurl}
                 className="ad_fourImage"
                 alt=""
                 />

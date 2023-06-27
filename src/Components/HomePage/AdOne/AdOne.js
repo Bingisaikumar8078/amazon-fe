@@ -8,7 +8,7 @@ function AdOne(props) {
   async function getProduct() {
     try {
       const list = await axios.get(
-        "http://localhost:8082/amazon/products/product/phone"
+        "http://localhost:9090/amazon/products/product/phone"
       );
       setListOfProducts(list.data);
     } catch (error) {
@@ -30,7 +30,7 @@ function AdOne(props) {
               style={{ textDecoration: "none" }}
               key={listOfProduct[0]?.id}
             >
-              <img src={listOfProduct[0]?.imageURL} width="150px" alt="" />
+              <img src={listOfProduct[0]?.imageurl} width="150px" alt="" />
             </Link>
           </>
         }
