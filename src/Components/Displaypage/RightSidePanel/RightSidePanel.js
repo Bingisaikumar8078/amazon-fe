@@ -29,6 +29,7 @@ function RightSidePanel(props) {
   async function getProductWithType(e) {
     try {
       const type = e.target.value;
+      console.log(type);
       list = await axios.get(
         `http://localhost:9090/amazon/products/phone/${type}`
       );
@@ -62,11 +63,10 @@ function RightSidePanel(props) {
               type="checkbox"
               value="Samsung"
               onClick={(e) => getProductWithType(e)}
-              
-              />
+            />
             Samsung
           </label>
-         {/* <FormControlLabel
+          {/* <FormControlLabel
             control={
               <Checkbox  onChange={(e) => getProductWithType(e)} name="Samsung" />
             }

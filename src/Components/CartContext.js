@@ -10,6 +10,7 @@ class CartContextProvider extends Component {
         ? JSON.parse(localStorage.getItem("myCart"))
         : [];
     let cardAmount = existingCart.length;
+    // let s=0;
     this.state = {
       item: existingCart,
       size: cardAmount,
@@ -25,15 +26,17 @@ class CartContextProvider extends Component {
       decrement: (value) => {
         let itemList = this.state.item;
         let newList = itemList.filter((item) => item !== value);
+        console.log(newList);
         this.setState({ item: newList });
         this.setState({ size: this.state.item.length });
-        this.state.removeFromLocalCache();
+        this.state.removeFromLocalCache(newList);
       },
       saveToLocalCache: () => {
         localStorage.setItem("myCart", JSON.stringify(this.state.item));
       },
-      removeFromLocalCache: () => {
-        localStorage.removeItem("myCart", JSON.stringify(this.state.item));
+      removeFromLocalCache: (newList) => {
+        console.log(newList);
+        localStorage.setItem("myCart", JSON.stringify(newList));
       },
     };
   }

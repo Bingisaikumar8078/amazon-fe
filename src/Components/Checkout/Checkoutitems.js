@@ -6,10 +6,10 @@ import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
-import { Button } from "@material-ui/core";
+import { Button, ButtonGroup } from "@material-ui/core";
 import { CartContext } from "../CartContext";
-
-
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CheckoutItems = (props) => {
-  const { decrement } = useContext(CartContext);
+  const { increment, decrement } = useContext(CartContext);
 
   const classes = useStyles();
 
@@ -46,7 +46,9 @@ const CheckoutItems = (props) => {
 
     decrement(props.definition);
   };
-
+  const addToCart = () => {
+    increment(props.definition);
+  };
   return (
     <>
       <Card className={classes.root}>
@@ -72,6 +74,24 @@ const CheckoutItems = (props) => {
               readOnly
             />
           </Typography>
+          <ButtonGroup>
+            <Button
+              className={classes.button}
+              size="small"
+              aria-label="reduce"
+              onClick={removeFromCart}
+            >
+              <RemoveIcon fontSize="small" />
+            </Button>
+            <Button
+              aria-label="increase"
+              size="small"
+              className={classes.button}
+              onClick={addToCart}
+            >
+              <AddIcon fontSize="small" />
+            </Button>
+          </ButtonGroup>
           <Button
             variant="contained"
             color="primary"

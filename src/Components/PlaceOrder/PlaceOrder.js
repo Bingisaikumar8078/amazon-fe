@@ -8,9 +8,9 @@ import { CartContext } from "../CartContext";
 
 function PlaceOrder() {
   const [productDetails, setProductDetails] = useState([]);
+
   const { increment } = useContext(CartContext);
   let { productId } = useParams();
-
 
   const addTOCart = () => {
     increment(productDetails);
@@ -41,16 +41,18 @@ function PlaceOrder() {
         `http://localhost:9090/amazon/products/search/${productId}`
       );
       setProductDetails(product.data);
-      console.log(product.data);
     } catch (error) {
       console.error(error);
     }
   }
+
   useEffect(() => {
-    getProduct();
+    if (productId) {
+      getProduct();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const rating=Number(productDetails.rating)
+  }, [productId]);
+  const rating = Number(productDetails.rating);
 
   return (
     <div>
@@ -80,7 +82,7 @@ function PlaceOrder() {
                 style={{ fontSize: "20px" }}
                 readOnly
               />
-          | 1000 + answered questions
+              | 1000 + answered questions
             </div>
             <hr></hr>
             <div>
@@ -109,35 +111,31 @@ function PlaceOrder() {
               <div>
                 <ul>
                   {about !== undefined ? (
-                    about.map((item , index) => (
-                      <li key={index}>
-                        {item} 
-                      </li>
-                    ))
+                    about.map((item, index) => <li key={index}>{item}</li>)
                   ) : (
                     <span></span>
                   )}
                 </ul>
                 {/* <ul>
-                  <li>
-                    6.1-inch (15.5 cm diagonal) Liquid Retina HD LCD display
-                  </li>
-                  <li>
-                    Water and dust resistant (2 meters for up to 30 minutes,
-                    IP68)
-                  </li>
-                  <li>
-                    Dual-camera system with 12MP Ultra Wide and Wide cameras;
-                    Night mode, Portrait mode, and 4K video up to 60fps
-                  </li>
-                  <li>
-                    12MP TrueDepth front camera with Portrait mode, 4K video,
-                    and Slo-Mo
-                  </li>
-                  <li>Face ID for secure authentication</li>
-                  <li>A13 Bionic chip with third-generation Neural Engine</li>
-                  <li>Fast-charge capable</li>
-                </ul> */}
+                <li>
+                  6.1-inch (15.5 cm diagonal) Liquid Retina HD LCD display
+                </li>
+                <li>
+                  Water and dust resistant (2 meters for up to 30 minutes,
+                  IP68)
+                </li>
+                <li>
+                  Dual-camera system with 12MP Ultra Wide and Wide cameras;
+                  Night mode, Portrait mode, and 4K video up to 60fps
+                </li>
+                <li>
+                  12MP TrueDepth front camera with Portrait mode, 4K video,
+                  and Slo-Mo
+                </li>
+                <li>Face ID for secure authentication</li>
+                <li>A13 Bionic chip with third-generation Neural Engine</li>
+                <li>Fast-charge capable</li>
+              </ul> */}
               </div>
             </div>
           </div>
